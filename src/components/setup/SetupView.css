@@ -1,0 +1,398 @@
+.setup-view {
+  background-color: #0A1022;
+  background-image: linear-gradient(to bottom, rgba(10, 16, 34, 0.7), rgba(10, 16, 34, 0.8)), url('../../assets/background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  min-height: 100vh;
+  color: #E2E8F0;
+  padding: 20px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gaussian blur overlay */
+.setup-view::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 16, 34, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.setup-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.setup-header h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  color: #FFF;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.9), 0 0 60px rgba(59, 130, 246, 0.6);
+  font-family: 'Trajan Pro', 'Times New Roman', serif;
+  letter-spacing: 4px;
+  font-weight: 800;
+  max-width: 100%;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.setup-header h2 {
+  font-size: 1.6rem;
+  color: #94A3B8;
+  font-weight: normal;
+  margin-top: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.setup-logo {
+  width: 500px;
+  height: auto;
+  transform: rotate(0deg);
+  margin: 0 auto 20px;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8));
+}
+
+.civ-selection-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: rgba(15, 23, 42, 0.85);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid #334155;
+  backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 2;
+}
+
+.civ-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  width: 100%;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 15px;
+  /* Scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: #475569 #1E293B;
+}
+
+.civ-card {
+  background-color: rgba(30, 41, 59, 0.8);
+  border-radius: 12px;
+  padding: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid transparent;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  backdrop-filter: blur(4px);
+}
+
+.civ-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent, rgba(0,0,0,0.2));
+  z-index: 1;
+}
+
+.civ-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  background-color: rgba(45, 55, 72, 0.9);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.civ-card.selected {
+  border-color: #38BDF8;
+  background-color: rgba(30, 64, 175, 0.9);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.8);
+  transform: translateY(-5px) scale(1.02);
+}
+
+.civ-flag {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  z-index: 2;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
+.civ-flag img {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+}
+
+.civ-flag.large {
+  font-size: 5rem;
+  margin-right: 25px;
+}
+
+.civ-name {
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #FFF;
+  text-align: center;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.civ-leader {
+  font-size: 1rem;
+  color: #94A3B8;
+  text-align: center;
+  z-index: 2;
+}
+
+.civ-details {
+  background-color: rgba(30, 41, 59, 0.9);
+  border-radius: 12px;
+  padding: 30px;
+  flex: 1;
+  width: 100%;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 25px;
+  backdrop-filter: blur(10px);
+}
+
+.civ-details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, rgba(30, 41, 59, 0.8), transparent);
+  z-index: 1;
+}
+
+.civ-details-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(75, 85, 99, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+.civ-details-header h3 {
+  font-size: 2.5rem;
+  margin: 0 0 5px 0;
+  color: #FFF;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.civ-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.civ-trait h4, .civ-bonus h4 {
+  color: #60A5FA;
+  margin: 0 0 10px 0;
+  font-size: 1.4rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.civ-trait p, .civ-bonus p {
+  color: #E2E8F0;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.game-options {
+  background-color: rgba(45, 55, 72, 0.8);
+  border-radius: 12px;
+  padding: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 25px;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-width: 180px;
+}
+
+.option-group label {
+  font-weight: bold;
+  color: #E2E8F0;
+  font-size: 1rem;
+}
+
+.option-group select, .option-group input {
+  padding: 12px 16px;
+  background-color: rgba(71, 85, 105, 0.8);
+  color: #FFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.option-group select:focus, .option-group input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #3B82F6;
+  background-color: rgba(75, 85, 99, 0.9);
+}
+
+.option-group select:hover, .option-group input:hover {
+  background-color: rgba(75, 85, 99, 0.9);
+}
+
+.start-game-btn {
+  margin-top: 35px;
+  padding: 16px 32px;
+  background-color: #3B82F6;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.start-game-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.start-game-btn:hover {
+  background-color: #2563EB;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.start-game-btn:hover::after {
+  opacity: 1;
+  animation: shine 1.5s ease-out;
+}
+
+@keyframes shine {
+  0% {
+    left: -50%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+.start-game-btn:disabled {
+  background-color: #64748B;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.start-game-btn:disabled::after {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .civ-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .civ-selection-container {
+    padding: 20px;
+    width: 95%;
+  }
+  
+  .civ-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .civ-details {
+    max-width: none;
+  }
+  
+  .setup-header h1 {
+    font-size: 3rem;
+  }
+  
+  .civ-details-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .civ-flag.large {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+}

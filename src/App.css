@@ -1,38 +1,388 @@
-.App {
+/* General game styling */
+body {
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #0F172A;
+  color: #E2E8F0;
+  margin: 0;
+  padding: 0;
+}
+
+.action-btn.disabled {
+  background-color: #475569;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.action-btn.disabled:hover {
+  background-color: #475569;
+  transform: none;
+  box-shadow: none;
+}
+
+.civilization-game {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Game Header */
+.game-header {
+  background-color: #1E293B;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.game-info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.turn-info {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.player-info {
+  font-size: 1rem;
+}
+
+.resource-info {
+  display: flex;
+  gap: 15px;
+  background-color: #2D3748;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.gold-info, .science-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  background-color: #3B82F6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #2563EB;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.end-turn-btn {
+  background-color: #059669;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.end-turn-btn:hover {
+  background-color: #047857;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Game Container */
+.game-container {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
+  background-color: #0F172A;
+}
+
+/* Sidebar */
+.game-sidebar {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Panels */
+.unit-info-panel, .city-info-panel, .help-panel, .tech-summary-panel {
+  background-color: #1E293B;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.unit-info-panel h3, .city-info-panel h3, .help-panel h3, .tech-summary-panel h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #4A5568;
+  padding-bottom: 5px;
+  color: #FFF;
+}
+
+.unit-info-panel p, .city-info-panel p, .help-panel p, .tech-summary-panel p {
+  margin: 8px 0;
+  color: #A0AEC0;
+}
+
+.found-city-btn {
+  background-color: #8B5CF6;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.found-city-btn:hover {
+  background-color: #7C3AED;
+}
+
+.manage-city-btn {
+  background-color: #F59E0B;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.manage-city-btn:hover {
+  background-color: #D97706;
+}
+
+.tech-tree-btn {
+  background-color: #6366F1;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.tech-tree-btn:hover {
+  background-color: #4F46E5;
+}
+
+/* Tech Progress Bar */
+.tech-progress-container {
+  height: 6px;
+  background-color: #1F2937;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.tech-progress-bar {
+  height: 100%;
+  background-color: #8B5CF6;
+  transition: width 0.3s ease;
+}
+
+.tech-progress-label {
+  font-size: 0.8rem;
+  color: #94A3B8;
+  text-align: right;
+}
+
+/* Game notifications */
+.game-notification {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  animation: fadeIn 0.3s ease-in-out;
+  max-width: 80%;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.game-notification.info {
+  background-color: #3182CE;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.game-notification.success {
+  background-color: #38A169;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.game-notification.error {
+  background-color: #E53E3E;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Minimap */
+.minimap {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  height: 200px;
+  background-color: #1E293B;
+  border: 2px solid #4A5568;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 50;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.minimap-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 230px;
+  background-color: #1E293B;
+  border: 2px solid #4A5568;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 50;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Combat preview */
+.combat-preview {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1E293B;
+  border: 2px solid #4A5568;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  gap: 20px;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.combat-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.combat-unit-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.combat-vs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #F59E0B;
+}
+
+.combat-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.combat-stat {
+  display: flex;
+  gap: 10px;
+}
+
+.combat-stat-label {
+  color: #94A3B8;
+  width: 70px;
+}
+
+.combat-stat-value {
+  font-weight: bold;
+}
+
+.combat-result {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.combat-result.victory {
+  background-color: #065F46;
+  color: white;
+}
+
+.combat-result.defeat {
+  background-color: #991B1B;
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .game-container {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .game-sidebar {
+    width: 100%;
+    order: 1;
+  }
+  
+  .game-header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .game-info {
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+  
+  .resource-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .action-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .minimap {
+    width: 150px;
+    height: 150px;
   }
 }
